@@ -654,7 +654,7 @@ def construct_balance(company_ticker: str, output_mode: str = '', percentile:int
 
     return values, items
 
-def forecast_balance_sheet_multi_year(company_ticker: str, years: int = 3, percentile: float = 50.0, output_mode: str = '', weighted: bool = False, heavy_recent: bool = False, simulation_number: int = 10000, download_data: bool = False, clip_outlier_growths: float = 0.2) -> dict:
+def forecast_balance_sheet_multi_year(company_ticker: str, years: int = 3, percentile: float = 50.0, output_mode: str = '', weighted: bool = False, heavy_recent: bool = False, simulation_number: int = 10000, download_data: bool = False, clip_outlier_growths: float = 0) -> dict:
     """
     Generates a multi-year projected balance sheet forecast using Monte Carlo simulation
     driven by historical Pretax Income growth, automatically fetched from Yahoo Finance via yfinance.

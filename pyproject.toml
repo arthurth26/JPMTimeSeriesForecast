@@ -19,3 +19,5 @@ dependencies = [
     "tensorflow[and-cuda]==2.19.0",
     "yfinance>=0.2.66",
 ]
+[project.scripts]
+forecast = "cli:main"
