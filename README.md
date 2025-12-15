@@ -65,20 +65,24 @@ forecast_balance_sheet_multi_year(
 |-----------------------|-----------------------------------------------------------------------------------------------|----------------------|
 | `--years`             | Number of future years to forecast (must be 1, 2, or 3)                                        | `3`                  |
 | `--percentile`        | Percentile of Monte Carlo paths to use (10 = conservative, 50 = base, 90 = aggressive)         | `50.0`               |
-| `--heavy-recent`      | Enable strong exponential weighting (1, ½, ¼, ⅛…) — heavily favors recent performance (great for momentum stocks like NVDA or AMD) | Disabled             |
+| `--weighted`          | Use time-weighted growth statistics instead of simple unweighted mean/std. Required for --heavy-recent | Disabled (simple mean) |
+| `--heavy-recent`      | Use aggressive exponential decay weighting (1, ½, ¼, ⅛…) — strongly favors recent years. Requires --weighted | Disabled |
 | `--download-data`     | Save raw income statement and balance sheet downloaded from Yahoo Finance to the `out/` folder | Disabled             |
 | `--clip`              | **Enable** or set custom growth-rate clipping. Use `--clip 0.3` for ±30%, `--clip 0.1` for ±10%, etc. (overrides default ±20%) | 0       |
 | `--seed`              | Random seed for the Monte Carlo simulations. Use the same seed for fully reproducible results across runs. | `0`                  |
 
 ```bash
-# Default clipping (±20%)
-python cli.py NVDA --heavy-recent
+# Default: unweighted (simple mean), no clipping
+python forecast.py NVDA
 
-# Custom clipping (±30%)
-python cli.py NVDA --heavy-recent --clip 0.3
+# Weighted (harmonic) + clipping
+python forecast.py NVDA --weighted --clip 0.2
 
-# No clipping at all
-python cli.py NVDA --heavy-recent --no-clip
+# Heavy recent momentum + full volatility
+python forecast.py AMD --weighted --heavy-recent --clip 0.0 --seed 42
+
+# Conservative unweighted scenario
+python forecast.py INTC --percentile 25
 ```
 
 # Sample Output
