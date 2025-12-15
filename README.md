@@ -68,6 +68,7 @@ forecast NVDA --heavy-recent --percentile 75 --no-clip
 
 
 # Sample Output
+```bash
 ================================================================================
 PROJECTED BALANCE SHEET SUMMARY (Year 2025) - NVDA
 ================================================================================
@@ -186,3 +187,4 @@ Notes:
   • Future years = Projected using selected Pretax Income growth percentile
   • Assets = Liabilities + Equity enforced | Negative equity capped at 0
 ==============================================================================================================
+```
