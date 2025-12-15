@@ -59,13 +59,27 @@ forecast_balance_sheet_multi_year(
 ```
 # Command Line Usage
 
-Run forecasts directly from terminal:
+### Optional Flags
+
+| Flag                  | Description                                                                                   | Default              |
+|-----------------------|-----------------------------------------------------------------------------------------------|----------------------|
+| `--years`             | Number of future years to forecast (must be 1, 2, or 3)                                        | `3`                  |
+| `--percentile`        | Percentile of Monte Carlo paths to use (10 = conservative, 50 = base, 90 = aggressive)         | `50.0`               |
+| `--heavy-recent`      | Enable strong exponential weighting (1, ½, ¼, ⅛…) — heavily favors recent performance (great for momentum stocks like NVDA or AMD) | Disabled             |
+| `--download-data`     | Save raw income statement and balance sheet downloaded from Yahoo Finance to the `out/` folder | Disabled             |
+| `--clip`              | **Enable** or set custom growth-rate clipping. Use `--clip 0.3` for ±30%, `--clip 0.1` for ±10%, etc. (overrides default ±20%) | 0       |
+| `--seed`              | Random seed for the Monte Carlo simulations. Use the same seed for fully reproducible results across runs. | `0`                  |
 
 ```bash
-forecast NVDA --heavy-recent --percentile 75 --no-clip
+# Default clipping (±20%)
+python cli.py NVDA --heavy-recent
+
+# Custom clipping (±30%)
+python cli.py NVDA --heavy-recent --clip 0.3
+
+# No clipping at all
+python cli.py NVDA --heavy-recent --no-clip
 ```
-
-
 
 # Sample Output
 ```bash

@@ -6,8 +6,6 @@ import os
 import yfinance as yf
 from datetime import datetime
 
-np.random.seed(0)
-
 lines_console = []
 lines_csv = []
 
@@ -654,7 +652,7 @@ def construct_balance(company_ticker: str, output_mode: str = '', percentile:int
 
     return values, items
 
-def forecast_balance_sheet_multi_year(company_ticker: str, years: int = 3, percentile: float = 50.0, output_mode: str = '', weighted: bool = False, heavy_recent: bool = False, simulation_number: int = 10000, download_data: bool = False, clip_outlier_growths: float = 0) -> dict:
+def forecast_balance_sheet_multi_year(company_ticker: str, years: int = 3, percentile: float = 50.0, output_mode: str = '', weighted: bool = False, heavy_recent: bool = False, simulation_number: int = 10000, download_data: bool = False, clip_outlier_growths: float = 0, seed: int = 0) -> dict:
     """
     Generates a multi-year projected balance sheet forecast using Monte Carlo simulation
     driven by historical Pretax Income growth, automatically fetched from Yahoo Finance via yfinance.
@@ -733,6 +731,7 @@ def forecast_balance_sheet_multi_year(company_ticker: str, years: int = 3, perce
     - Balance sheet integrity is strictly enforced: Assets = Liabilities + Equity.
     - Heavy recent weighting + no clipping often gives more realistic upside for growth stocks.
     """
+    np.random.seed(seed)
     if years < 1 or years > 3:
         raise ValueError("years must be 1, 2, or 3")
     current_year = datetime.now().year
@@ -865,4 +864,4 @@ def forecast_balance_sheet_multi_year(company_ticker: str, years: int = 3, perce
     return forecasts
 
 # Example run
-forecast_balance_sheet_multi_year('NVDA', years=3, percentile=50.0, weighted=True, heavy_recent=True,)
+# forecast_balance_sheet_multi_year('NVDA', years=3, percentile=50.0, weighted=True, heavy_recent=True,)
