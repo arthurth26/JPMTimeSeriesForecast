@@ -4,6 +4,8 @@ A lightweight, live-data-driven Python tool for projecting multi-year balance sh
 
 No manual CSV downloads required — just call the main function with a ticker!
 
+Further reading: [Google Docs](https://docs.google.com/document/d/1EHDNr0NFKaytzTWCdFpQMPxOdizU22rmryEQ29Dy3uU/edit?usp=sharing)
+
 ## Features
 
 - **Live data fetching** via `yfinance` — always uses the latest annual income statement and balance sheet.
